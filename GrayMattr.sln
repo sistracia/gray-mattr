@@ -7,6 +7,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GrayMattr", "GrayMattr\Gray
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GrayMattr.Test", "GrayMattr.Test\GrayMattr.Test.fsproj", "{E01E0641-48A1-4A57-8993-71E3ACAAED8E}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "StripBomStr", "StripBomStr\StripBomStr.fsproj", "{03E23302-984C-4998-97D9-7A107FC578A3}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "StripBomStr.Test", "StripBomStr.Test\StripBomStr.Test.fsproj", "{7D56057C-6B43-4140-B238-F42F8C32BD47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{E01E0641-48A1-4A57-8993-71E3ACAAED8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E01E0641-48A1-4A57-8993-71E3ACAAED8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E01E0641-48A1-4A57-8993-71E3ACAAED8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03E23302-984C-4998-97D9-7A107FC578A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03E23302-984C-4998-97D9-7A107FC578A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03E23302-984C-4998-97D9-7A107FC578A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03E23302-984C-4998-97D9-7A107FC578A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D56057C-6B43-4140-B238-F42F8C32BD47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D56057C-6B43-4140-B238-F42F8C32BD47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D56057C-6B43-4140-B238-F42F8C32BD47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D56057C-6B43-4140-B238-F42F8C32BD47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
