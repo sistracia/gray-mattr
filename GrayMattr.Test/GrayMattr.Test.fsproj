@@ -7,6 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Utils.fs" />
+    <Compile Include="MattrEmpty.fs" />
+    <Compile Include="MattrWindow.fs" />
+    <Compile Include="MattrExcerpt.fs" />
+    <Compile Include="Mattr.fs" />
+    <Compile Include="MattrLanguage.fs" />
+    <Compile Include="MattrRead.fs" />
+    <Compile Include="MattrTest.fs" />
+    <Compile Include="ParseCustom.fs" />
+    <Compile Include="ParseJSON.fs" />
+    <Compile Include="ParseYAML.fs" />
+    <Compile Include="Stringify.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
