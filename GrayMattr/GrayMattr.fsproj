@@ -30,6 +30,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)../README.md" Pack="true" PackagePath="/"/>
+    <None Include="$(MSBuildThisFileDirectory)../LICENSE" Pack="true" PackagePath="/"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="Defaults.fs" />
     <Compile Include="Types.fs" />
     <Compile Include="Utils.fs" />
