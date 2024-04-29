@@ -38,29 +38,17 @@ let mattrTests =
           }
 
           test "string yaml types should still return the empty object" {
-              let actual: GrayFile<IDictionary<obj, obj>> = Mattr.Parse<IDictionary<obj, obj>>("--- true\n---")
-
-              for kvp in actual.Data.Value do
-                  printfn "Key: %s, Value: %s" (string(kvp.Key)) (string(kvp.Value))
-
+              let actual: GrayFile<YamlData> = Mattr.Parse<YamlData>("--- true\n---")
               Expect.equal (Option.isNone actual.Data) true "Should be have none data"
           }
 
           test "number yaml types should still return the empty object" {
-              let actual: GrayFile<IDictionary<obj, obj>> = Mattr.Parse<IDictionary<obj, obj>>("--- 42\n---")
-
-              for kvp in actual.Data.Value do
-                  printfn "Key: %s, Value: %s" (string(kvp.Key)) (string(kvp.Value))
-
+              let actual: GrayFile<YamlData> = Mattr.Parse<YamlData>("--- 42\n---")
               Expect.equal (Option.isNone actual.Data) true "Should be have none data"
           }
 
           test "should return an object when the string is 0 length:" {
-              let actual: GrayFile<IDictionary<obj, obj>> = Mattr.Parse<IDictionary<obj, obj>>("")
-
-              for kvp in actual.Data.Value do
-                  printfn "Key: %s, Value: %s" (string(kvp.Key)) (string(kvp.Value))
-
+              let actual: GrayFile<YamlData> = Mattr.Parse<YamlData>("")
               Expect.equal (printType actual) "GrayFile`1" "Should be GrayFile type"
           }
 
