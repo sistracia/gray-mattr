@@ -32,23 +32,29 @@ let mattrTests =
               Expect.equal (Encoding.Default.GetString actual.Orig) fixture "Orig string should be equal fixture"
           }
 
-          test "boolean yaml types should still return the empty object" {
-              let actual: GrayFile<obj> = Mattr.Parse("--- true\n---")
+          test "boolean json types should still return the empty object" {
+              let actual: GrayFile<obj> =
+                  Mattr.Parse("--- true\n---", Mattr.DefaultOption<obj>().SetLanguage("json"))
+
               Expect.equal (Option.isNone actual.Data) true "Should be have none data"
           }
 
-          test "string yaml types should still return the empty object" {
-              let actual: GrayFile<YamlData> = Mattr.Parse<YamlData>("--- true\n---")
+          test "string json types should still return the empty object" {
+              let actual: GrayFile<obj> =
+                  Mattr.Parse("--- true\n---", Mattr.DefaultOption<obj>().SetLanguage("json"))
+
               Expect.equal (Option.isNone actual.Data) true "Should be have none data"
           }
 
-          test "number yaml types should still return the empty object" {
-              let actual: GrayFile<YamlData> = Mattr.Parse<YamlData>("--- 42\n---")
+          test "number json types should still return the empty object" {
+              let actual: GrayFile<obj> =
+                  Mattr.Parse<obj>("--- 42\n---", Mattr.DefaultOption<obj>().SetLanguage("json"))
+
               Expect.equal (Option.isNone actual.Data) true "Should be have none data"
           }
 
           test "should return an object when the string is 0 length:" {
-              let actual: GrayFile<YamlData> = Mattr.Parse<YamlData>("")
+              let actual: GrayFile<IDictionary<string, obj>> = Mattr.Parse("")
               Expect.equal (printType actual) "GrayFile`1" "Should be GrayFile type"
           }
 
