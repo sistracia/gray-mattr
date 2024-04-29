@@ -38,7 +38,7 @@ let mattrTests =
           }
 
           test "string yaml types should still return the empty object" {
-              let actual: GrayFile<IDictionary<string, string>> = Mattr.Parse("--- true\n---")
+              let actual: GrayFile<IDictionary<string, string>> = Mattr.Parse<IDictionary<string, string>>("--- true\n---")
 
               for kvp in actual.Data.Value do
                   printfn "Key: %s, Value: %s" kvp.Key kvp.Value
@@ -47,7 +47,7 @@ let mattrTests =
           }
 
           test "number yaml types should still return the empty object" {
-              let actual: GrayFile<IDictionary<string, string>> = Mattr.Parse("--- 42\n---")
+              let actual: GrayFile<IDictionary<string, string>> = Mattr.Parse<IDictionary<string, string>>("--- 42\n---")
 
               for kvp in actual.Data.Value do
                   printfn "Key: %s, Value: %s" kvp.Key kvp.Value
@@ -56,7 +56,7 @@ let mattrTests =
           }
 
           test "should return an object when the string is 0 length:" {
-              let actual: GrayFile<IDictionary<string, string>> = Mattr.Parse("")
+              let actual: GrayFile<IDictionary<string, string>> = Mattr.Parse<IDictionary<string, string>>("")
 
               for kvp in actual.Data.Value do
                   printfn "Key: %s, Value: %s" kvp.Key kvp.Value
