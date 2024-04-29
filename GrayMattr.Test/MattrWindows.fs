@@ -1,4 +1,4 @@
-module MattrWindow
+module MattrWindows
 
 open System.Text
 open System.Collections.Generic
@@ -9,7 +9,7 @@ open Utils
 [<CLIMutable>]
 type YamlData = { abc: string; version: int }
 
-let mattrWindowTests =
+let mattrWindowsTests =
     testList
         "gray-matter (windows carriage returns)"
         [

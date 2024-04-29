@@ -8,7 +8,7 @@ open MattrRead
 open MattrLanguage
 open Mattr
 open MattrExcerpt
-open MattrWindow
+open MattrWindows
 open MattrEmpty
 
 [<Tests>]
@@ -24,7 +24,7 @@ let tests =
           mattrLanguageTests
           mattrTests
           mattrExcerptTests
-          mattrWindowTests
+          mattrWindowsTests
           mattrEmptyTests ]
 
 

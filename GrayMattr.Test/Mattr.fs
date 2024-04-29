@@ -43,7 +43,7 @@ let mattrTests =
           }
 
           test "number yaml types should still return the empty object" {
-              let actual: GrayFile<obj> = Mattr.Parse("--- 42\n---")
+              let actual: GrayFile<obj> = Mattr.Parse<obj>("--- 42\n---")
               Expect.equal (Option.isNone actual.Data) true "Should be have none data"
           }
 

@@ -1,6 +1,5 @@
 ﻿namespace GrayMattr
 
-open System
 open System.IO
 open System.Collections.Generic
 open System.Text.RegularExpressions
@@ -31,7 +30,7 @@ type Mattr private () =
           Excerpt = DefaultGrayExcerptFalse() }
 
     static member DefaultFile() : GrayFile<IDictionary<string, obj>> =
-        { Data = Some (new Dictionary<string, obj>())
+        { Data = Some(new Dictionary<string, obj>())
           Content = ""
           Excerpt = ""
           Empty = Some ""
@@ -79,8 +78,7 @@ type Mattr private () =
     static member Language<'TData>(str: string, option: GrayOption<'TData>) : GrayLanguage =
         let op: string = fst option.Delimiters
         let str: string = if (Mattr.Test(str)) then str.[op.Length ..] else str
-
-        let language: string = (str.[.. str.IndexOf(Environment.NewLine) - 1])
+        let language: string = str.[.. Regex.Match(str, @"\r?\n").Index - 1]
 
         { GrayLanguage.Raw = language
           GrayLanguage.Name = language.Trim() }
@@ -119,7 +117,7 @@ type Mattr private () =
                 else
                     str
 
-            let closeIndex: int = str.IndexOf(close)
+            let closeIndex: int = str.IndexOf close
             let closeIndex: int = if (closeIndex = -1) then len else closeIndex
 
             let file: GrayFile<'TData> =
@@ -140,13 +138,13 @@ type Mattr private () =
                     | None -> file
                     | Some(engines: IGrayEngine<'TData, GrayOption<'TData>>) ->
                         { file with
-                            Data = Some (engines.Parse(file.Matter, option)) }
+                            Data = Some(engines.Parse(file.Matter, option)) }
 
             let content: string =
                 if (closeIndex = len) then
                     ""
                 else
-                    let newContent: string = str.[(closeIndex + close.Length) ..]
+                    let newContent: string = str.[closeIndex + close.Length ..]
 
                     let newContent: string =
                         if (newContent.Length > 0 && newContent.[0] = '\r') then
