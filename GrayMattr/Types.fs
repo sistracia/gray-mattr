@@ -3,7 +3,7 @@ namespace GrayMattr
 open System.Text.Json
 open YamlDotNet.Serialization
 open YamlDotNet.Serialization.NamingConventions
-open System
+open System.Collections.Generic
 
 [<Struct>]
 type GrayLanguage = { Raw: string; Name: string }
@@ -138,6 +138,7 @@ type DefaultGrayExcerptFalse<'TData>() =
     interface IGrayExcerpt<'TData, GrayOption<'TData>> with
         member _.Excerpt(file: GrayFile<'TData>, _: GrayOption<'TData>) : GrayFile<'TData> = file
 
+/// If `Excerpt` is `true`, get the excerpt defined after front-matter
 type DefaultGrayExcerptTrue<'TData>() =
     interface IGrayExcerpt<'TData, GrayOption<'TData>> with
         member _.Excerpt(file: GrayFile<'TData>, option: GrayOption<'TData>) : GrayFile<'TData> =
@@ -154,6 +155,7 @@ type DefaultGrayExcerptTrue<'TData>() =
             else
                 file
 
+/// JSON
 type DefaultGrayJSONEngine<'TData>() =
     interface IGrayEngine<'TData, GrayOption<'TData>> with
         member _.Parse(content: string, _: GrayOption<'TData>) : 'TData =
@@ -161,6 +163,7 @@ type DefaultGrayJSONEngine<'TData>() =
 
         member _.Stringify(data: 'TData, _: GrayOption<'TData>) : string = JsonSerializer.Serialize data
 
+/// YAML
 type DefaultGrayYAMLEngine<'TData>() =
     interface IGrayEngine<'TData, GrayOption<'TData>> with
         member _.Parse(content: string, _: GrayOption<'TData>) : 'TData =
@@ -254,6 +257,18 @@ module Stringify =
     let newline (str: string) =
         if str.EndsWith("\n") then str else str + "\n"
 
+    /// Default engines
+    let defaultEngines<'TData> () : Map<string, IGrayEngine<'TData, GrayOption<'TData>>> =
+        Map[("json", DefaultGrayJSONEngine<'TData>())
+            ("yaml", DefaultGrayYAMLEngine<'TData>())]
+
+    let defaultOption<'TData> () : GrayOption<'TData> =
+        { Engines = defaultEngines ()
+          Delimiters = (Defaults.delimiter, Defaults.delimiter)
+          Language = Defaults.language
+          ExcerptSeparator = Defaults.excerptSeparator
+          Excerpt = DefaultGrayExcerptFalse<'TData>() }
+
     let parse<'TData> (file: GrayFile<'TData>) (data: 'TData option) (option: GrayOption<'TData>) : string =
         let language: string =
             match file.Language with
@@ -268,13 +283,16 @@ module Stringify =
         | Some(engine: IGrayEngine<'TData, GrayOption<'TData>>) ->
             let (op: string, close: string) = option.Delimiters
 
+            // In origin `gray-matter` package,
+            // the data from parameter and data in `file.Data` is merged.
+            // But at the time this written, don't know how to do that in F#.
             let (data: 'TData) =
-                match data with
+                match file.Data with
                 | Some(data: 'TData) -> data
                 | None ->
-                    match file.Data with
-                    | None -> nullValues<'TData> ()
+                    match data with
                     | Some(data: 'TData) -> data
+                    | None -> nullValues<'TData> ()
 
             let matter: string = engine.Stringify(data, option).Trim()
 
@@ -292,5 +310,22 @@ module Stringify =
 
 type GrayFile<'TData> with
 
+    member this.Stringify() : string =
+        Stringify.parse this None (Stringify.defaultOption ())
+
+    member this.Stringify(additionalData: 'TData) : string =
+        this.Stringify(additionalData, (Stringify.defaultOption ()))
+
     member this.Stringify(additionalData: 'TData, option: GrayOption<'TData>) : string =
-        Stringify.parse this (Some additionalData) option
+        let file: GrayFile<'TData> =
+            { Data = this.Data
+              Content = this.Content
+              Excerpt = this.Excerpt
+              Empty = this.Empty
+              IsEmpty = this.IsEmpty
+              Orig = this.Orig
+              Language = option.Language
+              Matter = this.Matter
+              Path = this.Path }
+
+        Stringify.parse file (Some additionalData) option
