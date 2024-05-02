@@ -11,6 +11,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "StripBomStr", "StripBomStr\
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "StripBomStr.Test", "StripBomStr.Test\StripBomStr.Test.fsproj", "{7D56057C-6B43-4140-B238-F42F8C32BD47}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GrayMattr.Samples", "GrayMattr.Samples\GrayMattr.Samples.fsproj", "{6B9D4B94-5E22-43E8-9725-884CC0F403C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrayMattr.Samples.Csharp", "GrayMattr.Samples.Csharp\GrayMattr.Samples.Csharp.csproj", "{0555ACF9-5631-4B80-BBC1-4A3DE4A2EFB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{7D56057C-6B43-4140-B238-F42F8C32BD47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D56057C-6B43-4140-B238-F42F8C32BD47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D56057C-6B43-4140-B238-F42F8C32BD47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B9D4B94-5E22-43E8-9725-884CC0F403C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B9D4B94-5E22-43E8-9725-884CC0F403C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B9D4B94-5E22-43E8-9725-884CC0F403C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B9D4B94-5E22-43E8-9725-884CC0F403C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0555ACF9-5631-4B80-BBC1-4A3DE4A2EFB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0555ACF9-5631-4B80-BBC1-4A3DE4A2EFB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0555ACF9-5631-4B80-BBC1-4A3DE4A2EFB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0555ACF9-5631-4B80-BBC1-4A3DE4A2EFB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
